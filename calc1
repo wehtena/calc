@@ -1,0 +1,58 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    private static Scanner scn = new Scanner(System.in);
+
+        public static void main(String[] args) {
+            int a = getInt(); //метод должен принимать числа и считывать их с клавиатуры
+            int b = getInt(); //метод должен принимать числа и считывать их с клавиатуры
+            char ab = getOperation(); //метод должен считывать операцию +,-,/,*
+            int result = calc(a,b,ab); //метод должен выполнять заданную мной операцию
+            System.out.println("Ваш ответ:"+result);
+        }
+
+    static int getInt() {
+        int zxc;//строкой выше должно быть sout(введите ваше число номер 1)
+        if (scn.hasNextInt()){
+            zxc = scn.nextInt();
+        } else{
+            System.out.println("Ошибка. Попробуйте ещё раз!");
+            scn.next();
+            zxc = getInt();
+        }return zxc;
+    }
+    public static char getOperation() {
+        char ab;
+        if (scn.hasNext()) {
+            ab = scn.next().charAt(0);
+        } else {
+            System.out.println("Знак не опознан, калькулятор может работать только со следующими операциями: +, -, *, /.");
+            scn.next();
+            ab = getOperation();
+        }
+        return ab;
+    }
+        public static int calc(int a, int b, int ab){
+            int result;
+            switch (ab){
+                case'+':
+                    result = a + b;
+                    break;
+                case'-':
+                    result = a - b;
+                    break;
+                case'*':
+                    result = a * b;
+                    break;
+                case'/':
+                    result = a / b;
+                    break;
+                default:
+                    System.out.println("Операция не распознана, повторите еще раз");
+                    result = calc(a, b, getOperation());
+            }return result;
+
+        }
+}
